@@ -1,5 +1,6 @@
 package com.amazon.ata.lists.stringbuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class ATAStringBuilder {
      * Constructs a string builder with no characters in it.
      */
     public ATAStringBuilder() {
+        this.value = new ArrayList<>();
         // PARTICIPANTS - initialize here
     }
 
@@ -28,6 +30,8 @@ public class ATAStringBuilder {
      * @param initialString the initial contents of the string builder
      */
     public ATAStringBuilder(String initialString) {
+        this();
+    this.append(initialString);
         // PARTICIPANTS - initialize here
     }
 
@@ -40,8 +44,8 @@ public class ATAStringBuilder {
      * represented by this object
      */
     public int length() {
+        return this.value.size();
         // PARTICIPANTS - implement here
-        return -1;
     }
 
     /**
@@ -58,6 +62,12 @@ public class ATAStringBuilder {
      * @return a reference to this object.
      */
     public ATAStringBuilder append(String str) {
+        if (str == null){
+            str = "null";
+        }
+        for (int i=0; i <str.length();i++){
+            this.value.add(str.charAt(i));
+        }
         // PARTICIPANTS - implement here
         return this;
     }
@@ -77,6 +87,10 @@ public class ATAStringBuilder {
      * @throws IndexOutOfBoundsException if the offset is invalid.
      */
     public ATAStringBuilder insert(int offset, char c) {
+        if (offset < 0 || offset >this.length()){
+            throw new IndexOutOfBoundsException("offset is out of bounds");
+        }
+        this.value.add(offset,c);
         // PARTICIPANTS - implement here
         return this;
     }
@@ -97,8 +111,12 @@ public class ATAStringBuilder {
      *                                   negative or greater than or equal to {@code length()}.
      */
     public char charAt(int index) {
+        if (index <0 || index >= this.length()){
+            throw new IndexOutOfBoundsException("index if out of bounds");
+
+        }
+        return this.value.get(index);
         // PARTICIPANTS - implement here
-        return ' ';
     }
 
     /**
